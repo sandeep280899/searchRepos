@@ -166,31 +166,36 @@ const App = () => {
   const displayCounts = () => {
     let existingPackages = localStorage.getItem("existingKeys");
     let counts = existingPackages ? JSON.parse(existingPackages) : {};
-
+  
     // Sort entries based on count in descending order
     const sortedEntries = Object.entries(counts).sort((a, b) => b[1] - a[1]);
-
+  
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Package Name</th>
-              <th>Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sortedEntries.slice(0, 10).map(([packageName, count]) => (
-              <tr key={packageName}>
-                <td>{packageName}</td>
-                <td>{count}</td>
+        {Object.keys(counts).length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Package Name</th>
+                <th>Count</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {sortedEntries.slice(0, 10).map(([packageName, count]) => (
+                <tr key={packageName}>
+                  <td>{packageName}</td>
+                  <td>{count}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="pt-20">No Data Found</div>
+        )}
       </div>
     );
   };
+  
 
   
 
